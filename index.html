@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDb API</title>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="searchbar">
+        <input class="search-input" type="text" placeholder="Enter the movie name">
+        <button class="search-submit"> Submit </button>
+    </div>
+
+    <div class="movie-grid">
+        <div class="movie-cell">
+            <img src="https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg" alt="poster">
+            <div class="movie-footer">
+                <div class="movie-info">
+                    <h1>John Wick</h1>
+                    <h3>Released in : 25 october 2002</h3>
+                </div>
+                <button>More ...</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar" role="navigation" aria-label="Pagination">
+        <!-- <button class="nav-arrow" aria-label="Previous page">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button> -->
+
+        <div class="nav-pages" aria-hidden="false">
+            <button class="first-page page-btn">1</button>
+            
+            <h4>...</h4>
+            
+            <button class="previous-page nav-arrow" aria-label="Previous page">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <button class="page-btn current">2</button>
+            
+            <button class="next-page nav-arrow" aria-label="Next page">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <h4>...</h4>
+
+            <button class="last-page page-btn">10</button>
+        </div>
+
+    </div>
+</body>
+</html>

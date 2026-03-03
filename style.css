@@ -1,0 +1,176 @@
+/* General page */
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: #f4f6f8;
+	color: #0f172a;
+	margin: 0;
+	padding: 28px;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Search bar */
+.searchbar {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 22px;
+}
+
+.searchbar input {
+	width: 60%;
+	max-width: 560px;
+	padding: 12px 14px;
+	font-size: 16px;
+	border: 1px solid #d6dbe0;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 2px 6px rgba(16,24,40,0.04);
+	outline: none;
+	transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.searchbar input:focus {
+	border-color: #0ea5e9;
+	box-shadow: 0 6px 20px rgba(14,165,233,0.12);
+}
+
+.searchbar button {
+	padding: 12px 18px;
+	border-radius: 10px;
+	border: none;
+	background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 8px 20px rgba(2,132,199,0.12);
+	transition: transform 100ms ease, box-shadow 100ms ease;
+}
+
+.searchbar button:hover { transform: translateY(-2px); }
+
+/* Movie grid and cells */
+.movie-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 18px;
+}
+
+.movie-cell {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 16px;
+	box-shadow: 0 6px 20px rgba(2,6,23,0.06);
+	display: flex;
+	flex-direction: column;
+    justify-content: space-evenly;
+	gap: 8px;
+	transition: transform 140ms ease, box-shadow 140ms ease;
+    /* height: fit-content; */
+}
+
+.movie-cell:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 14px 40px rgba(2,6,23,0.1);
+}
+
+.movie-footer {display: flex; flex-direction: row; justify-content: space-between; gap:4px; align-items: center;}
+.movie-cell h1 { font-size: 18px; margin: 0; color: #071130; }
+.movie-cell h2 { font-size: 14px; margin: 0; color: #374151; font-weight: 600; }
+.movie-cell h3 { font-size: 13px; margin: 0; color: #6b7280; }
+.movie-cell img { height: 400px; object-fit: cover;}
+
+.movie-cell button {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: 1px solid #e6eef6;
+	background: transparent;
+	color: #0369a1;
+	font-weight: 700;
+	cursor: pointer;
+    text-wrap: nowrap;
+}
+
+@media (max-width: 520px) {
+	.searchbar input { width: 70%; }
+	.movie-grid { gap: 12px; }
+	.movie-cell { padding: 12px; }
+}
+
+/* Navbar (bottom pagination visual) */
+.navbar {
+	margin: 28px auto 0;
+	background: #ffffff;
+	padding: 8px 12px;
+	border-radius: 999px;
+	box-shadow: 0 10px 30px rgba(2,6,23,0.08);
+	display: none;
+	align-items: center;
+	gap: 10px;
+	width: fit-content;
+	justify-content: center;
+}
+
+.nav-arrow {
+	background: transparent;
+	border: none;
+	padding: 8px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.nav-arrow svg { display: block; }
+
+.nav-pages { display: flex; gap: 8px; align-items: center; }
+.nav-pages h4 { margin: 0px; }
+
+.page-btn {
+	min-width: 36px;
+	height: 36px;
+	border-radius: 10px;
+	border: 1px solid transparent;
+	background: transparent;
+	color: #334155;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.page-btn.current {
+	background: linear-gradient(180deg, #e6f6ff 0%, #d1efff 100%);
+	color: #0369a1;
+	border-color: rgba(3,105,161,0.06);
+    cursor: none;
+}
+
+@media (max-width: 420px) {
+	.navbar { padding: 6px 8px; }
+	.page-btn { min-width: 30px; height: 30px; font-size: 13px; }
+}
+
+/* Favorite star button */
+.movie-actions { display:flex; flex-direction: column; gap:8px; align-items:center; }
+.fav-btn svg { display:block; }
+.fav-btn .filled { display: none; }
+
+.fav-btn {
+    width: 100%;
+	background: transparent;
+	border: none;
+	padding: 6px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #9ca3af; /* neutral star color */
+}
+
+.fav-btn.pressed {
+	color: #f59e0b; /* amber */
+}
+
+.fav-btn.pressed path { fill: currentColor; stroke: currentColor; }
+.fav-btn path { fill: none; stroke: currentColor; }
+
+.more-btn { padding: 8px 12px; border-radius:8px; border:1px solid #e6eef6; background:transparent; color:#0369a1; font-weight:700; cursor:pointer }
+
