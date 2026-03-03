@@ -45,9 +45,13 @@ function createMovieCell(movie){
     const div = document.createElement("div")
     div.classList = "movie-cell"
 
-    console.log(favorites)
-    console.log(movie)
-    console.log(favorites.includes(movie))
+    var isPressed = false;
+    favorites.forEach(favorite => {
+        if (favorite["imdbID"] == movie["imdbID"]){
+            isPressed = true
+        }
+    })
+    console.log(isPressed)
 
     div.innerHTML = `
     <img src="${movie.Poster}" alt="poster">
@@ -58,7 +62,7 @@ function createMovieCell(movie){
             <h3>Date of released : ${movie.Year}</h3>
         </div>
         <div class="movie-actions">
-            <button class="fav-btn${favorites.includes(movie) ? "pressed" : ""}" aria-pressed="false" title="Add to favorites">
+            <button class="fav-btn ${isPressed ? "pressed" : ""}" aria-pressed="false" title="Add to favorites">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" stroke="currentColor" stroke-width="1"/>
                 </svg>
@@ -70,6 +74,7 @@ function createMovieCell(movie){
     movieGrid.appendChild(div)
 
     const fav = div.querySelector('.fav-btn')
+
     fav.addEventListener('click', () => {
         fav.classList.toggle("pressed")
 
@@ -78,7 +83,7 @@ function createMovieCell(movie){
             favorites.push(movie)
         } else {
             console.log("Removed")
-            favorites = favorites.filter((favMovie)=>{favMovie != movie})
+            favorites = favorites.filter((favorite)=> favorite["imdbID"] != movie["imdbID"])
         }
 
         localStorage.setItem("favorites",JSON.stringify(favorites))
