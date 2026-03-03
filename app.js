@@ -5,6 +5,7 @@ const movieGrid = document.querySelector(".movie-grid")
 
 const searchInput = document.querySelector(".search-input")
 const searchSubmit = document.querySelector(".search-submit")
+const showFavBtn = document.querySelector(".show-fav")
 
 const navBar = document.querySelector(".navbar")
 const currentPage = document.querySelector(".current")
@@ -116,4 +117,13 @@ searchSubmit.addEventListener("click",()=>{
     } else {
         searchMovie(searchInput.value)
     }
+})
+
+showFavBtn.addEventListener("click", () => {
+    searchInput.value = ""
+    movieGrid.innerHTML = "" 
+    navBar.style.display = "none"
+    favorites.forEach(movie => {
+        createMovieCell(movie)
+    })
 })
