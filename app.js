@@ -2,36 +2,6 @@
 
 // const movieGrid = document.querySelector(".movie-grid")
 
-const navBar = document.querySelector(".navbar")
-const currentPage = document.querySelector(".current")
-const firstPage = document.querySelector(".first-page")
-const previousPage = document.querySelector(".previous-page")
-const nextPage = document.querySelector(".next-page")
-const lastPage = document.querySelector(".last-page")
-
-let movieName = ""
-let current = 1
-
-// firstPage.addEventListener("click",()=>{
-//     searchMovie(movieName,1)
-// })
-
-// previousPage.addEventListener("click",()=>{
-//     if (current>1){
-//         searchMovie(movieName,current-1)
-//     }
-// })
-
-// nextPage.addEventListener("click",()=>{
-//     if (current<lastPage.textContent){
-//         searchMovie(movieName,current+1)
-//     }
-// })
-
-// lastPage.addEventListener("click",()=>{
-//     searchMovie(movieName,lastPage.textContent)
-// })
-
 class MovieApp{
     constructor() {
         this.apikey = "5fe29907"
@@ -49,10 +19,41 @@ class MovieApp{
             }
         })
 
-        this.favManager = new FavManager()
+        this.navBar = document.querySelector(".navbar")
+        this.currentPage = document.querySelector(".current")
+        this.firstPage = document.querySelector(".first-page")
+        this.previousPage = document.querySelector(".previous-page")
+        this.nextPage = document.querySelector(".next-page")
+        this.lastPage = document.querySelector(".last-page")
 
+        this.movieName = ""
+        this.current = 1
+
+        this.firstPage.addEventListener("click",()=>{
+            this.searchMovie(this.movieName,1)
+        })
+
+        this.previousPage.addEventListener("click",()=>{
+            if (this.current>1){
+                this.searchMovie(this.movieName,this.current-1)
+            }
+        })
+
+        this.nextPage.addEventListener("click",()=>{
+            if (this.current<this.lastPage.textContent){
+                this.searchMovie(this.movieName,this.current+1)
+            }
+        })
+
+        this.lastPage.addEventListener("click",()=>{
+            this.searchMovie(this.movieName,this.lastPage.textContent)
+        })
+
+        this.favManager = new FavManager()
+        
         this.showFavBtn.addEventListener("click", () => {
             this.favManager.render()
+            this.navBar.style.display = "none"
         })
 
     }
@@ -62,18 +63,17 @@ class MovieApp{
         const res = await fetch("http://www.omdbapi.com/?apikey="+this.apikey+"&s="+name+"&page="+page,{headers : {"Accept":"application/json"}})
         const data = await res.json()
         
-        movieName = name
-        current = page
+        this.movieName = name
+        this.current = page
 
         console.log(data)
         if(data.Response == "False"){
             alert(data.Error)
         } else {
             
-            
-            lastPage.textContent = Math.round(data.totalResults / 10)
-            currentPage.textContent = current
-            navBar.style.display = "flex"
+            this.lastPage.textContent = Math.round(data.totalResults / 10)
+            this.currentPage.textContent = this.current
+            this.navBar.style.display = "flex"
 
             this.movieGrid.innerHTML = ""
         
@@ -85,10 +85,12 @@ class MovieApp{
                     this.showInfo(movieInfo)
                 })
             })
+
+            
         }
     }
 
-     async showInfo(movieInfo){
+    async showInfo(movieInfo){
         console.log("http://www.omdbapi.com/?apikey="+this.apikey+"&i="+movieInfo.imdbID)
         const res = await fetch("http://www.omdbapi.com/?apikey="+this.apikey+"&i="+movieInfo.imdbID,{headers : {"Accept":"application/json"}})
         const data = await res.json()
@@ -302,10 +304,52 @@ class FavManager {
     render() {
         this.searchInput.value = ""
         this.movieGrid.innerHTML = "" 
-        navBar.style.display = "none"
+        // navBar.style.display = "none"
         this.favorites.forEach(movieInfo => {
             this.listen(new Movie(movieInfo, true))
         })
+    }
+}
+
+class PageManager {
+    constructor(){
+        this.navBar = document.querySelector(".navbar")
+        this.currentPage = document.querySelector(".current")
+        this.firstPage = document.querySelector(".first-page")
+        this.previousPage = document.querySelector(".previous-page")
+        this.nextPage = document.querySelector(".next-page")
+        this.lastPage = document.querySelector(".last-page")
+
+        this.movieName = ""
+        this.current = 1
+
+        firstPage.addEventListener("click",()=>{
+            searchMovie(movieName,1)
+        })
+
+        previousPage.addEventListener("click",()=>{
+            if (current>1){
+                searchMovie(movieName,current-1)
+            }
+        })
+
+        nextPage.addEventListener("click",()=>{
+            if (current<lastPage.textContent){
+                searchMovie(movieName,current+1)
+            }
+        })
+
+        lastPage.addEventListener("click",()=>{
+            searchMovie(movieName,lastPage.textContent)
+        })
+    }
+
+    showNavBar(){
+        this.navBar.style.display = "flex"
+    }
+
+    hideNavBar(){
+        this.navBar.style.display = "none"
     }
 }
 
